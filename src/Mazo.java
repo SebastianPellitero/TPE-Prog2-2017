@@ -1,11 +1,18 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.*;
 
 public class Mazo {
-     private ArrayList<Carta> conjCartas = new ArrayList<Carta>();
+     ArrayList<Carta> conjCartas = new ArrayList<Carta>();
+     int mitad;
 
      Mazo(){
-         //ArrayList<Carta> conjCartas = ;
+         ArrayList<Carta> conjCartas = new ArrayList<Carta>();
+     }
+
+     Mazo(ArrayList<Carta> newMazo){
+         ArrayList<Carta> conjCartas = new ArrayList<Carta>(newMazo);
      }
 
      void agregarCarta(Carta carta){
@@ -13,7 +20,6 @@ public class Mazo {
      }
 
     void crearMazoaPartirDeCarta(Carta carta, int cantidad){
-
         for (int j=0; j < cantidad; j++){ //cantidad de cartas
             ArrayList<Atributo> atributos = carta.getAtributos();
             ArrayList<Atributo> atributosCarta = new ArrayList<Atributo>();
@@ -25,12 +31,20 @@ public class Mazo {
             Carta cartaAux = new Carta(nombredecarta,atributosCarta);
             conjCartas.add(cartaAux);
         }
+        mitad = cantidad/2;
     }
 
     void printCartas(){
         for(int i=0; i < conjCartas.size(); i++){
-            System.out.println(conjCartas.get(i).getNombreCarta());
+            System.out.print(conjCartas.get(i).getNombreCarta()+" ");
             conjCartas.get(i).printAtributos();
+            System.out.print("\n");
         }
+    }
+
+    ArrayList<Carta> repartirCartas(){
+        ArrayList<Carta> newMazo = new ArrayList<>(conjCartas.subList(0,mitad));
+        conjCartas.subList(0, mitad).clear(); //conjCartas.removeRange(0,mitad);
+        return newMazo;
     }
 }
