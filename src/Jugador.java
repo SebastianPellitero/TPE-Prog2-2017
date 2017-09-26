@@ -49,7 +49,6 @@ public class Jugador {
             System.out.print("\n");
         }
     }
-
     boolean tieneCartas(){
         if (monton.isEmpty())
             return false;
@@ -65,7 +64,16 @@ public class Jugador {
         monton.add(nuevaCarta);
     }
 
-    Carta pierdeUnaCarta(){
-        return (cartaSeleccionada);
+    void resultaEmpate(){
+        monton.add(cartaSeleccionada);
     }
+
+    Carta pierdeUnaCarta(){
+        return(cartaSeleccionada);
+    }
+
+    int contarCartas(){
+        return(monton.size());
+    }
+
 }

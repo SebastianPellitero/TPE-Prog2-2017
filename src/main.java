@@ -13,11 +13,14 @@ public class main {
         Carta carta1 = new Carta("prime", atributo1);
         Mazo mazoMinions = new Mazo();
         mazoMinions.crearMazoaPartirDeCarta(carta1,20);
+        System.out.println(mazoMinions.tieneCartasValidas());
         Jugador yo = new Jugador("buho");
         Jugador otro = new Jugador("pibe cantina");
 
         Partida round1 = new Partida(yo,otro,mazoMinions);
         round1.repartirCartas();
-        round1.jugar();
+        //System.out.println(round1.jugarPartida());
+        int cantidadDeRondas = 20;
+        System.out.println(round1.jugarPartidaPorRondas(cantidadDeRondas));
     }
 }

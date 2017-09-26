@@ -47,4 +47,26 @@ public class Mazo {
         conjCartas.subList(0, mitad).clear(); //conjCartas.removeRange(0,mitad);
         return newMazo;
     }
+
+    Boolean tieneCartasValidas(){
+        if (!conjCartas.isEmpty()) {
+            Carta comparadora = conjCartas.get(0);
+            for (int i = 1; i < conjCartas.size(); i++) {
+                if (conjCartas.get(i).getAtributos().size() == comparadora.getAtributos().size()) {
+                    for (int j = 0; j < conjCartas.get(i).getAtributos().size(); j++) {
+                        for (int m = 0; m < comparadora.getAtributos().size(); m++) {
+                            if (conjCartas.get(i).getAtributos().get(j).getNombre() != comparadora.getAtributos().get(m).getNombre())
+                                return (false);
+                        }
+                    }
+                }else{
+                    return (false);
+                }
+            }
+            re
+            turn (true);
+        }
+        return (false);
+    }
+
 }
