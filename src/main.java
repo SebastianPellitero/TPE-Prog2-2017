@@ -1,26 +1,15 @@
-import java.util.ArrayList;
-
 public class main {
     public static void main(String[] args) {
 
-        Atributo fuerza = new Atributo("Fuerza", 50);
-        Atributo destreza = new Atributo("Destreza", 30);
-        Atributo inteligencia = new Atributo("Int");
-        ArrayList<Atributo> atributo1 = new ArrayList<Atributo>();
-        atributo1.add(fuerza);
-        atributo1.add(destreza);
-        atributo1.add(inteligencia);
-        Carta carta1 = new Carta("prime", atributo1);
-        Mazo mazoMinions = new Mazo();
-        mazoMinions.crearMazoaPartirDeCarta(carta1,20);
+        Mazo mazoMinions = new Mazo(4,"Fuerza", "Destreza", "Inteligencia");
+        mazoMinions.printCartas();
         System.out.println(mazoMinions.tieneCartasValidas());
-        Jugador yo = new Jugador("buho");
-        Jugador otro = new Jugador("pibe cantina");
+
+        Jugador yo = new Jugador();
+        Jugador otro = new Jugador();
 
         Partida round1 = new Partida(yo,otro,mazoMinions);
-        round1.repartirCartas();
-        //System.out.println(round1.jugarPartida());
-        int cantidadDeRondas = 20;
-        System.out.println(round1.jugarPartidaPorRondas(cantidadDeRondas));
+        System.out.println(round1.jugarPartida());
+        System.out.println(round1.jugarPartidaPorRondas(5));
     }
 }

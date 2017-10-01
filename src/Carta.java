@@ -1,41 +1,45 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Carta {
-    String nombreCarta;
-    ArrayList<Atributo> atributos;
+    private String nombreCarta;
+    private Map<String, Integer> atributos = new HashMap<String, Integer>();
 
-    Carta(String nombreCarta, ArrayList<Atributo> atributos){
+    Carta(String nombreCarta){
         this.nombreCarta = nombreCarta;
-        this.atributos = new ArrayList<Atributo>(atributos);
     }
 
     public String getNombreCarta(){
         return nombreCarta;
     }
 
-    public ArrayList<Atributo> getAtributos() {
-        return atributos;
+    public void setAtributo(String nombre, Integer valor){
+        atributos.put(nombre, valor);
     }
 
-    public int getValorDeAtributo(String seleccionado){
-        for (int i=0; i < atributos.size(); i++){
-            if (seleccionado == atributos.get(i).getNombre()) {
-                return atributos.get(i).getValor();
-            }
+    public ArrayList<String> getListaAtributos(){
+        ArrayList<String> atrib = new ArrayList<String>();
+        for ( String key : atributos.keySet() ) {
+            atrib.add(key);
         }
-        return 0;
+        return atrib;
     }
 
-    public Atributo selectRandomAtributo(){
+    public String selectRandomAtributo(){
         Random randomGenerator = new Random();
-        return(atributos.get(randomGenerator.nextInt(atributos.size())));
+        ArrayList<String> atribs = this.getListaAtributos();
+        return atribs.get(randomGenerator.nextInt(atributos.size()));
+    }
+
+    public int getValorDeAtributo(String atrib){
+        return this.atributos.get(atrib);
     }
 
     public void printAtributos(){
-        for(int i=0; i < atributos.size(); i++){
-            System.out.print(atributos.get(i).getNombre() + " ");
-            System.out.print(atributos.get(i).getValor()+ " ");
+        for (String key : atributos.keySet()) {
+            System.out.println(key + " " + atributos.get(key));
         }
     }
 }
