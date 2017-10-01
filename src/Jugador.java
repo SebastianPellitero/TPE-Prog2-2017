@@ -1,79 +1,62 @@
 import java.util.ArrayList;
 
 public class Jugador {
-    String nombre;
-    ArrayList<Carta> monton = new ArrayList<>();
-    Carta cartaSeleccionada;
+    private ArrayList<Carta> monton = new ArrayList<Carta>();
+    private  Carta cartaSeleccionada;
 
-    Jugador(){
+    Jugador(){}
 
-    }
-
-    Jugador(String nombre){
-        this.nombre = nombre;
-    }
-
-    String getNombre(){
-        return nombre;
-    }
-
-    Jugador(String nombre, ArrayList<Carta> repartido){
-        this.nombre = nombre;
+    public void agregarMazo(ArrayList<Carta> repartido){
         this.monton = new ArrayList<>(repartido);
+        mostrarTodaslasCartas();
     }
 
-    void recibirCartas(ArrayList<Carta> repartido){
-        this.monton = new ArrayList<>(repartido);
-    }
-
-    void seleccionarCarta(){
+    public void seleccionarPrimerCarta(){
         if (!monton.isEmpty()) {
             cartaSeleccionada = monton.get(0);
             monton.remove(0);
         }
     }
 
-    String elegirAtributo(){
-        return (cartaSeleccionada.selectRandomAtributo().getNombre());
+    public String elegirAtributo(){
+        return cartaSeleccionada.selectRandomAtributo();
     }
 
-    int decirValorDeCarta(String atributoElegido){
-        return (cartaSeleccionada.getValorDeAtributo(atributoElegido));
+    public int getValorAtributoElegido(String atributoElegido){
+        return cartaSeleccionada.getValorDeAtributo(atributoElegido);
     }
 
-    void mostrarTodaslasCartas(){
-        System.out.println("Las cartas del jugador "+nombre+ " son: ");
+    public void mostrarTodaslasCartas(){
+        System.out.println("Las cartas del jugador  son: ");
         for(int i=0; i < monton.size(); i++){
-            System.out.print(monton.get(i).getNombreCarta() + " ");
+            System.out.print("carta" + monton.get(i).getNombreCarta() + " ");
             monton.get(i).printAtributos();
             System.out.print("\n");
         }
     }
-    boolean tieneCartas(){
-        if (monton.isEmpty())
-            return false;
-        return true;
+
+    public boolean tieneCartas(){
+        return !monton.isEmpty();
     }
 
-    Carta getCartaSeleccionada(){
-        return(cartaSeleccionada);
+    public Carta getCartaSeleccionada(){
+        return cartaSeleccionada;
     }
 
-    void ganaUnaCarta(Carta nuevaCarta){
+    public void ganaUnaCarta(Carta nuevaCarta){
         monton.add(cartaSeleccionada);
         monton.add(nuevaCarta);
     }
 
-    void resultaEmpate(){
+    public void resultaEmpate(){
         monton.add(cartaSeleccionada);
     }
 
-    Carta pierdeUnaCarta(){
-        return(cartaSeleccionada);
+    public Carta pierdeUnaCarta(){
+        return cartaSeleccionada;
     }
 
-    int contarCartas(){
-        return(monton.size());
+    public int contarCartas(){
+        return monton.size();
     }
-
 }

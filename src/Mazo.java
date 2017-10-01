@@ -1,40 +1,26 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.*;
+import java.util.Random;
 
 public class Mazo {
-     ArrayList<Carta> conjCartas = new ArrayList<Carta>();
-     int mitad;
+     private ArrayList<Carta> conjCartas = new ArrayList<Carta>();
+     private ArrayList<String> atributosCarta = new ArrayList<String>();
 
-     Mazo(){
-         ArrayList<Carta> conjCartas = new ArrayList<Carta>();
-     }
-
-     Mazo(ArrayList<Carta> newMazo){
-         ArrayList<Carta> conjCartas = new ArrayList<Carta>(newMazo);
-     }
-
-     void agregarCarta(Carta carta){
-         conjCartas.add(carta);
-     }
-
-    void crearMazoaPartirDeCarta(Carta carta, int cantidad){
-        for (int j=0; j < cantidad; j++){ //cantidad de cartas
-            ArrayList<Atributo> atributos = carta.getAtributos();
-            ArrayList<Atributo> atributosCarta = new ArrayList<Atributo>();
-            for(int i=0; i < atributos.size(); i++) { //cantidad de atributos de la carta
-                Atributo atributo1 = new Atributo(atributos.get(i).getNombre());
-                atributosCarta.add(atributo1);
-            }
-            String nombredecarta = "carta "+j;
-            Carta cartaAux = new Carta(nombredecarta,atributosCarta);
-            conjCartas.add(cartaAux);
+    Mazo(int cantidad, String... atributos){
+        for (String atrib: atributos) {
+            atributosCarta.add(atrib);
         }
-        mitad = cantidad/2;
+        Random randomGenerator = new Random();
+        for (int j=0; j < cantidad; j++){ //cantidad de cartas
+            String nombredecarta = "carta "+j;
+            Carta cartaNueva = new Carta("carta "+j);
+            for(int i=0; i < atributosCarta.size(); i++) { //cantidad de atributos de la carta
+                cartaNueva.setAtributo(atributosCarta.get(i), randomGenerator.nextInt(100));
+            }
+            conjCartas.add(cartaNueva);
+        }
     }
 
-    void printCartas(){
+    public void printCartas(){
         for(int i=0; i < conjCartas.size(); i++){
             System.out.print(conjCartas.get(i).getNombreCarta()+" ");
             conjCartas.get(i).printAtributos();
@@ -42,31 +28,35 @@ public class Mazo {
         }
     }
 
-    ArrayList<Carta> repartirCartas(){
-        ArrayList<Carta> newMazo = new ArrayList<>(conjCartas.subList(0,mitad));
-        conjCartas.subList(0, mitad).clear(); //conjCartas.removeRange(0,mitad);
-        return newMazo;
+    public void repartirCartas(Jugador... jugadores){
+        int cantCartasParaCada = conjCartas.size() / jugadores.length;
+        int inicio = 0;
+        for (Jugador jug: jugadores){
+            jug.agregarMazo(new ArrayList<Carta>(conjCartas.subList(inicio,cantCartasParaCada)));
+            inicio += cantCartasParaCada;
+            cantCartasParaCada += cantCartasParaCada;
+        }
     }
 
-    Boolean tieneCartasValidas(){
+    public Boolean tieneCartasValidas(){
         if (!conjCartas.isEmpty()) {
             Carta comparadora = conjCartas.get(0);
-            for (int i = 1; i < conjCartas.size(); i++) {
-                if (conjCartas.get(i).getAtributos().size() == comparadora.getAtributos().size()) {
-                    for (int j = 0; j < conjCartas.get(i).getAtributos().size(); j++) {
-                        for (int m = 0; m < comparadora.getAtributos().size(); m++) {
-                            if (conjCartas.get(i).getAtributos().get(j).getNombre() != comparadora.getAtributos().get(m).getNombre())
-                                return (false);
+            ArrayList<String> atribsOriginales = comparadora.getListaAtributos();
+
+            for (int i = 1; i < conjCartas.size(); i++) { //por cada carta del mazo
+                ArrayList<String> atribsCartaAux = conjCartas.get(i).getListaAtributos();
+                if ( atribsCartaAux.size() == atribsOriginales.size()) { //si tienen la misma cant de atribs
+                    for (int j = 0; j < atribsOriginales.size(); j++) { //por cada atrib
+                        if (atribsCartaAux.get(j) != atribsOriginales.get(j)){
+                            return false;
                         }
                     }
                 }else{
-                    return (false);
+                    return false;
                 }
             }
-            re
-            turn (true);
+            return true;
         }
-        return (false);
+        return false;
     }
-
 }
