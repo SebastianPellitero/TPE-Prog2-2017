@@ -37,9 +37,9 @@ public class Carta {
         return this.atributos.get(atrib);
     }
 
-    public void printAtributos(){
-        for (String key : atributos.keySet()) {
-            System.out.println(key + " " + atributos.get(key));
-        }
-    }
+//    public void printAtributos(){
+//        for (String key : atributos.keySet()) {
+//            System.out.println(key + " " + atributos.get(key));
+//        }
+//    }
 }

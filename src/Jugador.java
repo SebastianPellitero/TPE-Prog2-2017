@@ -2,13 +2,12 @@ import java.util.ArrayList;
 
 public class Jugador {
     private ArrayList<Carta> monton = new ArrayList<Carta>();
-    private  Carta cartaSeleccionada;
+    private Carta cartaSeleccionada;
 
     Jugador(){}
 
     public void agregarMazo(ArrayList<Carta> repartido){
         this.monton = new ArrayList<>(repartido);
-        mostrarTodaslasCartas();
     }
 
     public void seleccionarPrimerCarta(){
@@ -24,15 +23,6 @@ public class Jugador {
 
     public int getValorAtributoElegido(String atributoElegido){
         return cartaSeleccionada.getValorDeAtributo(atributoElegido);
-    }
-
-    public void mostrarTodaslasCartas(){
-        System.out.println("Las cartas del jugador  son: ");
-        for(int i=0; i < monton.size(); i++){
-            System.out.print("carta" + monton.get(i).getNombreCarta() + " ");
-            monton.get(i).printAtributos();
-            System.out.print("\n");
-        }
     }
 
     public boolean tieneCartas(){
@@ -59,4 +49,13 @@ public class Jugador {
     public int contarCartas(){
         return monton.size();
     }
+
+//    public void mostrarTodaslasCartas(){
+//        System.out.println("Las cartas del jugador  son: ");
+//        for(int i=0; i < monton.size(); i++){
+//            System.out.print("carta" + monton.get(i).getNombreCarta() + " ");
+//            monton.get(i).printAtributos();
+//            System.out.print("\n");
+//        }
+//    }
 }

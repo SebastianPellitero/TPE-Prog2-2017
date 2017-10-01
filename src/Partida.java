@@ -12,12 +12,9 @@ public class Partida {
     }
 
     public void jugarRonda(){
-        jugador1.mostrarTodaslasCartas();
-        jugador2.mostrarTodaslasCartas();
         jugador1.seleccionarPrimerCarta();
         jugador2.seleccionarPrimerCarta();
         String atributoElegido = jugadorDeTurno.elegirAtributo();
-        System.out.println("atrib" + atributoElegido);
         if(jugador1.getValorAtributoElegido(atributoElegido) > jugador2.getValorAtributoElegido(atributoElegido)){
             jugador1.ganaUnaCarta(jugador2.pierdeUnaCarta());
             jugadorDeTurno = jugador1;
@@ -47,7 +44,6 @@ public class Partida {
     public String jugarPartidaPorRondas(int cantRondas){
         mazoDeCartas.repartirCartas(jugador1, jugador2);
         for (int i=0; i < cantRondas; i++){
-            System.out.println("ronda num" + i);
             if (jugador1.tieneCartas() && jugador2.tieneCartas()){
                 jugarRonda();
             }
@@ -66,8 +62,8 @@ public class Partida {
                     return "EMPATE";
                 }
             }
-            return "Gano el Jugador1";
+            return "Gano el Jugador 1";
         }
-        return "Gano el Jugador2";
+        return "Gano el Jugador 2";
     }
 }
