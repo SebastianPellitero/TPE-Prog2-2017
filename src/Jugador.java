@@ -3,8 +3,15 @@ import java.util.ArrayList;
 public class Jugador {
     private ArrayList<Carta> monton = new ArrayList<Carta>();
     private Carta cartaSeleccionada;
+    private String nombre;
 
-    Jugador(){}
+    Jugador(String nombre){
+        this.nombre = nombre;
+    }
+
+    String getNombre(){
+        return nombre;
+    }
 
     public void agregarMazo(ArrayList<Carta> repartido){
         this.monton = new ArrayList<>(repartido);
@@ -29,9 +36,9 @@ public class Jugador {
         return !monton.isEmpty();
     }
 
-    public Carta getCartaSeleccionada(){
-        return cartaSeleccionada;
-    }
+//    public Carta getCartaSeleccionada(){
+//        return cartaSeleccionada;
+//    }
 
     public void ganaUnaCarta(Carta nuevaCarta){
         monton.add(cartaSeleccionada);

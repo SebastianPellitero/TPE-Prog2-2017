@@ -1,8 +1,8 @@
 public class Partida {
-    private Jugador jugador1;
-    private Jugador jugador2;
-    private Jugador jugadorDeTurno;
-    private Mazo mazoDeCartas;
+    protected Jugador jugador1;
+    protected Jugador jugador2;
+    protected Jugador jugadorDeTurno;
+    protected Mazo mazoDeCartas;
 
     Partida(Jugador jugador1, Jugador jugador2, Mazo mazoDeCartas ){
         this.jugador1 = jugador1;
@@ -27,43 +27,24 @@ public class Partida {
         }
     }
 
-    public String jugarPartida(){
-        mazoDeCartas.repartirCartas(jugador1, jugador2);
-        while (jugador1.tieneCartas() && jugador2.tieneCartas()){
-           jugarRonda();
-        }
+    public Boolean condicionDeCorte(){
+       return (jugador1.tieneCartas() && jugador2.tieneCartas());
+    }
+
+    public String validarResultado(){
         if (jugador1.tieneCartas()){
-            return "Gano el Jugador 1";
+            return "Gano " + jugador1.getNombre();
         } else if(jugador2.tieneCartas()){
-            return "GANO EL JUGADOR 2";
+            return "Gano " + jugador2.getNombre();
         }
         return "La partida termino";
     }
 
-
-    public String jugarPartidaPorRondas(int cantRondas){
+    public String jugarPartida(){
         mazoDeCartas.repartirCartas(jugador1, jugador2);
-        for (int i=0; i < cantRondas; i++){
-            if (jugador1.tieneCartas() && jugador2.tieneCartas()){
-                jugarRonda();
-            }
+        while (condicionDeCorte()){
+           jugarRonda();
         }
-        int cartasJ1 = jugador1.contarCartas();
-        int cartasJ2 = jugador2.contarCartas();
-        if (jugador1.tieneCartas()){
-            if (jugador2.tieneCartas()) {
-                if ( cartasJ1 > cartasJ2 ){
-                    return "Gano el Jugador 1 Por maxima cantidad de cartas";
-                }
-                else if(cartasJ1 < cartasJ2) {
-                    return  "Gano el Jugador 2 Por maxima cantidad de cartas";
-                }
-                else {
-                    return "EMPATE";
-                }
-            }
-            return "Gano el Jugador 1";
-        }
-        return "Gano el Jugador 2";
+        return validarResultado();
     }
 }
