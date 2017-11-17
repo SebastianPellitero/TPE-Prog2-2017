@@ -22,9 +22,14 @@ public class main {
         PartidaPorRondas partidaRondas = new PartidaPorRondas(jugador3,jugador4,mazoTransformers,5);
         System.out.println(partidaRondas.jugarPartida());
 
-        FiltroPorMayor ternura = new FiltroPorMayor("Ternura", 130);
-        FiltroPorMayor fuerza = new FiltroPorMayor("Fuerza", 150);
-        FiltroAnd filtro1 = new FiltroAnd(ternura, fuerza);
+        FiltroPorMayor fuerza = new FiltroPorMayor("Fuerza", 10);
+        FiltroPorMayor liderazgo = new FiltroPorMayor("Liderazgo", 30);
+        FiltroPorMenor pelegasg = new FiltroPorMenor("PeleasGanadas", 10);
+        FiltroPorIgual velocidad = new FiltroPorIgual("Velocidad", 35);
+        FiltroPorMenor valentia = new FiltroPorMenor("Valentia",29);
+        FiltroPorMayor fuerzaAnd = new FiltroPorMayor("Fuerza",15);
+        FiltroPorMenor alturaAnd = new FiltroPorMenor("Altura",13);
+        FiltroAnd filtroAnd = new FiltroAnd(fuerzaAnd, alturaAnd);
 
 
         ArrayList<Mazo> mazosVarios = new ArrayList<>();
@@ -33,15 +38,20 @@ public class main {
 
         ArrayList<Carta> resultado = new ArrayList<>();
 
-
+        System.out.println("Filtro simple");
         for ( Mazo mazoActual: mazosVarios ) {
             mazoActual.printCartas();
-            resultado = mazoActual.buscarCartas(ternura);
+            resultado = mazoActual.buscarCartas(fuerza);
         }
 
+        for (Carta carta: resultado){
+            carta.printAtributos();
+        }
+        System.out.println("Filtro doble");
+
         for ( Mazo mazoActual: mazosVarios ) {
             mazoActual.printCartas();
-            resultado = mazoActual.buscarCartas(filtro1);
+            resultado = mazoActual.buscarCartas(filtroAnd);
         }
 
         for (Carta carta: resultado){
