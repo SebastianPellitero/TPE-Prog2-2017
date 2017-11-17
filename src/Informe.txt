@@ -1,0 +1,9 @@
+Programación 2 - Trabajo Práctico parte 1
+
+Grupo: Fredes Carolina, Pellitero Sebastián 
+
+Para modelar la carta usamos un map que contiene pares de clave(atributo) valor y nos facilita el acceso a los mismos. 
+El mazo tiene un conjunto de cartas que se pueden inicializar pasándole un mazo predefinido o los atributos, y en este caso, el constructor genera valores aleatoriamente para cada uno de ellos.
+Jugador contiene su montón de cartas y se encarga de administrar su mazo ayudándose con su atributo carta seleccionada.
+Partida representa la partida normal donde se juega hasta que un jugador se quede sin cartas, el método jugar reparte las cartas a sus jugadores, juega la partida y luego valida el resultado.
+Partida por rondas, hereda de Partida, y sobreescribe los métodos que verifican la condición de corte (para este modo, verifica que ambos tengan cartas y que no se haya sobrepasado la cantidad definida de rondas) y la validación del resultado del juego.

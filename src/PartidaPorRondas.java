@@ -7,12 +7,12 @@ public class PartidaPorRondas extends Partida {
     }
 
     @Override
-    public Boolean condicionDeCorte(){
-        return ((jugador1.tieneCartas() && jugador2.tieneCartas()) &&(cantRondas != 0));
+    protected Boolean condicionDeCorte(){
+        return (super.condicionDeCorte() && (cantRondas != 0));
     }
 
     @Override
-    public String validarResultado(){
+    protected String validarResultado(){
         int cartasJ1 = jugador1.contarCartas();
         int cartasJ2 = jugador2.contarCartas();
         if (jugador1.tieneCartas()){

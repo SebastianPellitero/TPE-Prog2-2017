@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class Jugador {
-    private ArrayList<Carta> monton = new ArrayList<Carta>();
+    protected Mazo mazoJugador;
     private Carta cartaSeleccionada;
     private String nombre;
 
@@ -14,18 +17,20 @@ public class Jugador {
     }
 
     public void agregarMazo(ArrayList<Carta> repartido){
-        this.monton = new ArrayList<>(repartido);
+        this.mazoJugador = new Mazo(repartido);
     }
 
     public void seleccionarPrimerCarta(){
-        if (!monton.isEmpty()) {
-            cartaSeleccionada = monton.get(0);
-            monton.remove(0);
+        if (!mazoJugador.isMazoEmpty()) {
+            cartaSeleccionada = mazoJugador.getCarta(0);
+            mazoJugador.removeCarta(0);
         }
     }
 
     public String elegirAtributo(){
-        return cartaSeleccionada.selectRandomAtributo();
+        ArrayList<String> atributosDeCarta = cartaSeleccionada.getListaAtributos();
+        Random randomGenerator = new Random();
+        return atributosDeCarta.get(randomGenerator.nextInt(atributosDeCarta.size()));
     }
 
     public int getValorAtributoElegido(String atributoElegido){
@@ -33,7 +38,7 @@ public class Jugador {
     }
 
     public boolean tieneCartas(){
-        return !monton.isEmpty();
+        return !mazoJugador.isMazoEmpty();
     }
 
 //    public Carta getCartaSeleccionada(){
@@ -41,12 +46,12 @@ public class Jugador {
 //    }
 
     public void ganaUnaCarta(Carta nuevaCarta){
-        monton.add(cartaSeleccionada);
-        monton.add(nuevaCarta);
+        mazoJugador.addCarta(cartaSeleccionada);
+        mazoJugador.addCarta(nuevaCarta);
     }
 
     public void resultaEmpate(){
-        monton.add(cartaSeleccionada);
+        mazoJugador.addCarta(cartaSeleccionada);
     }
 
     public Carta pierdeUnaCarta(){
@@ -54,14 +59,14 @@ public class Jugador {
     }
 
     public int contarCartas(){
-        return monton.size();
+        return mazoJugador.sizeMazo();
     }
 
 //    public void mostrarTodaslasCartas(){
 //        System.out.println("Las cartas del jugador  son: ");
-//        for(int i=0; i < monton.size(); i++){
-//            System.out.print("carta" + monton.get(i).getNombreCarta() + " ");
-//            monton.get(i).printAtributos();
+//        for(int i=0; i < mazoJugador.size(); i++){
+//            System.out.print("carta" + mazoJugador.get(i).getNombreCarta() + " ");
+//            mazoJugador.get(i).printAtributos();
 //            System.out.print("\n");
 //        }
 //    }

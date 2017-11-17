@@ -11,7 +11,7 @@ public class Partida {
         this.mazoDeCartas = mazoDeCartas;
     }
 
-    public void jugarRonda(){
+    protected void jugarRonda(){
         jugador1.seleccionarPrimerCarta();
         jugador2.seleccionarPrimerCarta();
         String atributoElegido = jugadorDeTurno.elegirAtributo();
@@ -27,11 +27,11 @@ public class Partida {
         }
     }
 
-    public Boolean condicionDeCorte(){
+    protected Boolean condicionDeCorte(){
        return (jugador1.tieneCartas() && jugador2.tieneCartas());
     }
 
-    public String validarResultado(){
+    protected String validarResultado(){
         if (jugador1.tieneCartas()){
             return "Gano " + jugador1.getNombre();
         } else if(jugador2.tieneCartas()){
