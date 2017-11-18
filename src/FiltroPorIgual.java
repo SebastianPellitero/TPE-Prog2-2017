@@ -1,20 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiltroPorIgual extends Filtro {
-    private String atributo;
-    private int valorMaximo;
+public class FiltroPorIgual extends FiltroSimple {
 
     public FiltroPorIgual(String atributo, int valorMaximo){
-        super();
-        this.atributo = atributo;
-        this.valorMaximo = valorMaximo;
-    }
-    @Override
-    public List<String> getAtributoFiltro() {
-        List<String> atributos = new ArrayList<>();
-        atributos.add(atributo);
-        return atributos;
+        super(atributo,valorMaximo);
     }
 
     @Override

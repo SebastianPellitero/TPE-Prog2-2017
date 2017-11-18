@@ -7,3 +7,10 @@ El mazo tiene un conjunto de cartas que se pueden inicializar pasándole un mazo 
 Jugador contiene su montón de cartas y se encarga de administrar su mazo ayudándose con su atributo carta seleccionada.
 Partida representa la partida normal donde se juega hasta que un jugador se quede sin cartas, el método jugar reparte las cartas a sus jugadores, juega la partida y luego valida el resultado.
 Partida por rondas, hereda de Partida, y sobreescribe los métodos que verifican la condición de corte (para este modo, verifica que ambos tengan cartas y que no se haya sobrepasado la cantidad definida de rondas) y la validación del resultado del juego.
+
+Trabajo Práctico parte 2
+
+Para la segunda parte del trabajo usamos una clase abstracta "Filtro" la cual es heredada de "Filtro Compuesto" y "Filtro Simple" siguiendo el patron Composite.
+En estas dos clases implementamos getAtributoFiltro",luego creamos clases que implementan la funcion "cumple", mayor, igual y menor, en el caso de los Filtros Simples y And y Or, en el caso de los Filtros Compuestos.
+Para acceder a este tipo de busqueda, la partida debe recibir varios mazos, y usando el metodo "buscarPorFiltro" se pasa el filtro elegido por parametro y se retornará una lista de cartas que cumplen esas condiciones.
+Suponemos que todos los valores estan en integer.

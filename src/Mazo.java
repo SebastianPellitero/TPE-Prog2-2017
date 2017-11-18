@@ -99,19 +99,17 @@ public class Mazo {
     }
 
     private boolean contieneAtributos(Filtro f){
-        List<String> atributosDeFiltro = f.getAtributoFiltro();
-        if (this.conjCartas.get(0).getListaAtributos().containsAll(atributosDeFiltro)){
+        if (this.conjCartas.get(0).getListaAtributos().containsAll(f.getAtributoFiltro())){
             return true;
         }
         return false;
     }
-
-
+    /*
     public void printCartas(){
         for(int i=0; i < conjCartas.size(); i++){
             System.out.print(conjCartas.get(i).getNombreCarta()+" ");
             conjCartas.get(i).printAtributos();
             System.out.print("\n");
         }
-    }
+    }*/
 }

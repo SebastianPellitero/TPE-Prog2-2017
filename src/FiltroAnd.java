@@ -10,6 +10,6 @@ public class FiltroAnd extends FiltroCompuesto {
 
     @Override
     public boolean cumple(Carta carta) {
-        return (this.getFiltro1().cumple(carta) && getFiltro2().cumple(carta));
+        return (filtro1.cumple(carta) && filtro2.cumple(carta));
     }
 }

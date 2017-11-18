@@ -1,14 +1,30 @@
+import java.util.ArrayList;
+
 public class Partida {
     protected Jugador jugador1;
     protected Jugador jugador2;
     protected Jugador jugadorDeTurno;
     protected Mazo mazoDeCartas;
+    protected ArrayList<Mazo> mazoMultiple = new ArrayList<>();
 
     Partida(Jugador jugador1, Jugador jugador2, Mazo mazoDeCartas ){
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.jugadorDeTurno = jugador1;
         this.mazoDeCartas = mazoDeCartas;
+        this.mazoMultiple.add(mazoDeCartas);
+    }
+
+    public void agregarNuevoMazo(Mazo nuevoMazo){
+        this.mazoMultiple.add(nuevoMazo);
+    }
+
+    public ArrayList<Carta> buscarPorFiltro(Filtro f){
+        ArrayList<Carta> resultado = new ArrayList<>();
+        for ( Mazo mazoActual: mazoMultiple ) {
+            resultado.addAll(mazoActual.buscarCartas(f));
+        }
+        return resultado;
     }
 
     protected void jugarRonda(){
